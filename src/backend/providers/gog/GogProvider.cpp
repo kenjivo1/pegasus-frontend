@@ -26,8 +26,6 @@ GogProvider::GogProvider(QObject* parent)
     , gamelist(this)
     , metadata(this)
 {
-    setEnabled(false); // issue #464
-
     connect(&gamelist, &Gamelist::gameCountChanged,
             this, &GogProvider::gameCountChanged);
 }
