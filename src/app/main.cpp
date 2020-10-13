@@ -34,9 +34,14 @@ bool request_runtime_permissions();
 
 int main(int argc, char *argv[])
 {
+    Q_INIT_RESOURCE(assets);
+    Q_INIT_RESOURCE(locales);
+    Q_INIT_RESOURCE(qmlutils);
     Q_INIT_RESOURCE(frontend);
     Q_INIT_RESOURCE(themes);
-    Q_INIT_RESOURCE(qmlutils);
+    Q_INIT_RESOURCE(qmlutils_qmlcache);
+    Q_INIT_RESOURCE(frontend_qmlcache);
+    Q_INIT_RESOURCE(themes_qmlcache);
 
     TerminalKbd::on_startup();
 
