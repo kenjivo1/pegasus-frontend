@@ -46,7 +46,7 @@ struct AssetCheckResult {
 AssetCheckResult checkFile(const QFileInfo& file)
 {
     const QString basename = file.completeBaseName();
-    const int last_dash = basename.lastIndexOf(QChar('-'));
+    const int last_dash = basename.lastIndexOf(QLatin1Char('-'));
     const QString suffix = (last_dash == -1)
         ? QString()
         : basename.mid(last_dash + 1);
@@ -130,7 +130,7 @@ void findPegasusAssetsInScrapedir(const QDir& scrapedir,
         if (!detection_result.isValid())
             continue;
 
-        const QString shortpath = scrapedir.dirName() % '/' % detection_result.basename;
+        const QString shortpath = scrapedir.dirName() % QLatin1Char('/') % detection_result.basename;
         const auto slot = games_by_shortpath.find(shortpath);
         if (slot == games_by_shortpath.cend())
             continue;
@@ -179,7 +179,7 @@ void findAssets(model::Game& game,
                 HashMap<MetaTypes, QString, EnumHash>& xml_props,
                 const QString& collection_dir)
 {
-    const QString rom_dir = collection_dir % '/';
+    const QString rom_dir = collection_dir % QLatin1Char('/');
 
     if (game.assets().boxFront().isEmpty()) {
         QString& path = xml_props[MetaTypes::IMAGE];
@@ -241,7 +241,7 @@ void MetadataParser::enhance(providers::SearchContext& sctx,
         for (const size_t game_id : coll.game_ids()) {
             const PendingGame& game = sctx.games().at(game_id);
             const QString gamefile = game.files().front()->fileinfo().completeBaseName();
-            const QString shortpath = coll_shortname % '/' % gamefile;
+            const QString shortpath = coll_shortname % QLatin1Char('/') % gamefile;
             games_by_shortpath.emplace(shortpath, game.ptr());
         }
     }
@@ -318,7 +318,7 @@ void MetadataParser::parseGameEntry(QXmlStreamReader& xml,
                                     providers::SearchContext& sctx,
                                     const QString& collection_dir) const
 {
-    Q_ASSERT(xml.isStartElement() && xml.name() == "game");
+    Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("game"));
 
     // read all XML fields into a key-value map
     HashMap<MetaTypes, QString, EnumHash> xml_props;

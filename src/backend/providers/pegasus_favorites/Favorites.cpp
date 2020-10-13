@@ -76,7 +76,7 @@ Provider& Favorites::findDynamicData(const QVector<model::Collection*>&,
     QTextStream db_stream(&db_file);
     QString line;
     while (db_stream.readLineInto(&line)) {
-        if (line.startsWith('#'))
+        if (line.startsWith(QLatin1Char('#')))
             continue;
 
         const QString path = QFileInfo(paths::writableConfigDir(), line).canonicalFilePath();
@@ -132,7 +132,7 @@ void Favorites::start_processing()
 
             QTextStream db_stream(&db_file);
             for (const QString& fav : qAsConst(m_active_task))
-                db_stream << fav << endl;
+                db_stream << fav << Qt::endl;
 
             QMutexLocker lock(&m_task_guard);
             m_active_task.clear();

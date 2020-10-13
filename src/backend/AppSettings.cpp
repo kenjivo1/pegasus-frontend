@@ -216,7 +216,7 @@ void AppSettings::parse_gamedirs(const std::function<void(const QString&)>& call
         QTextStream stream(&config_file);
         QString line;
         while (stream.readLineInto(&line, LINE_MAX_LEN)) {
-            if (!line.startsWith('#'))
+            if (!line.startsWith(QLatin1Char('#')))
                 callback(line);
         }
     }

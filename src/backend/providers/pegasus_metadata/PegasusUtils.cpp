@@ -28,7 +28,7 @@ namespace utils {
 
 QStringList tokenize_by_comma(const QString& str)
 {
-    QStringList list = str.split(QChar(','), QString::SkipEmptyParts);
+    QStringList list = str.split(QLatin1Char(','), Qt::SkipEmptyParts);
     for (QString& item : list)
         item = item.trimmed();
 
@@ -45,7 +45,7 @@ QString assetline_to_url(const QString& value, const QString& relative_dir)
 
     QFileInfo finfo(value);
     if (finfo.isRelative())
-        finfo.setFile(relative_dir % '/' % value);
+        finfo.setFile(relative_dir % QLatin1Char('/') % value);
 
     return QUrl::fromLocalFile(finfo.absoluteFilePath()).toString();
 }

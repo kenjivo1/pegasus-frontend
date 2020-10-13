@@ -36,7 +36,7 @@ HashMap<QString, model::Game*> build_gamepath_db(const HashMap<size_t, providers
         for (const model::GameFile* const file_ptr : game.files()) {
             const QFileInfo& finfo = file_ptr->fileinfo();
 
-            QString path = finfo.canonicalPath() % '/' % finfo.completeBaseName();
+            QString path = finfo.canonicalPath() % QLatin1Char('/') % finfo.completeBaseName();
             map.emplace(std::move(path), game.ptr());
         }
     }
@@ -109,7 +109,7 @@ Provider& SkraperAssetsProvider::findStaticData(SearchContext& sctx)
                     const QFileInfo finfo = dir_it.fileInfo();
 
                     const QString game_path = finfo.canonicalPath().remove(game_dir.length(), subpath_len)
-                                            % '/' % finfo.completeBaseName();
+                                            % QLatin1Char('/') % finfo.completeBaseName();
                     if (!extless_path_to_game.count(game_path))
                         continue;
 

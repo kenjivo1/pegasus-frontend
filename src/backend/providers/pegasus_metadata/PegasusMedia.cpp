@@ -48,12 +48,12 @@ HashMap<QString, model::Game&> create_lookup_map(const HashMap<size_t, providers
         for (const model::GameFile* const gf_entry : game_entry.second.files()) {
             const QFileInfo& fi = gf_entry->fileinfo();
 
-            QString extless_path = fi.canonicalPath() % QChar('/') % fi.completeBaseName();
+            QString extless_path = fi.canonicalPath() % QLatin1Char('/') % fi.completeBaseName();
             out.emplace(std::move(extless_path), game_ref);
 
             // NOTE: the files are not necessarily in the same directory
             const QString& title = game_ref.title();
-            QString title_path = fi.canonicalPath() % QChar('/') % title;
+            QString title_path = fi.canonicalPath() % QLatin1Char('/') % title;
             out.emplace(std::move(title_path), game_ref);
         }
     }

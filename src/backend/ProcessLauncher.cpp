@@ -61,7 +61,7 @@ void replace_variables(QString& param, const QFileInfo& finfo)
 
 bool contains_slash(const QString& str)
 {
-    return str.contains(QChar('/')) || str.contains(QChar('\\'));
+    return str.contains(QLatin1Char('/')) || str.contains(QLatin1Char('\\'));
 }
 
 QString serialize_command(const QString& cmd, const QStringList& args)

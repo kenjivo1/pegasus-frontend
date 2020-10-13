@@ -64,8 +64,8 @@ bool read_api_json(GogEntry& entry, const QJsonDocument& json)
 
     const auto desc = json_root[QLatin1String("description")].toObject();
     if (!desc.isEmpty()) {
-        game.setSummary(desc[QLatin1String("lead")].toString().replace('\n', ' '))
-            .setDescription(desc[QLatin1String("full")].toString().replace('\n', ' '));
+        game.setSummary(desc[QLatin1String("lead")].toString().replace(QLatin1Char('\n'), QLatin1Char(' ')))
+            .setDescription(desc[QLatin1String("full")].toString().replace(QLatin1Char('\n'), QLatin1Char(' ')));
     }
 
     const auto date_raw = json_root[QLatin1String("release_date")].toString();

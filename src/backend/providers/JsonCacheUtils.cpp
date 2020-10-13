@@ -32,7 +32,7 @@ QString cached_json_path(const QString& provider_prefix,
 {
     Q_ASSERT(!paths::writableCacheDir().isEmpty()); // according to the Qt docs
 
-    const QString cache_path = paths::writableCacheDir() % '/' % provider_dir;
+    const QString cache_path = paths::writableCacheDir() % QLatin1Char('/') % provider_dir;
 
     // NOTE: mkpath() returns true if the dir already exists
     QDir cache_dir(cache_path);

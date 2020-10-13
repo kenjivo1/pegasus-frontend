@@ -70,7 +70,7 @@ QVector<QStringRef> split_list(const QString& str)
 {
     // FIXME: don't leave statics around
     static const QRegularExpression separator(QStringLiteral("[,\\s]"));
-    return str.splitRef(separator, QString::SkipEmptyParts);
+    return str.splitRef(separator, Qt::SkipEmptyParts);
 }
 
 /// returns a list of unique, '*.'-prefixed lowercase file extensions
@@ -80,7 +80,7 @@ QStringList parseFilters(const QString& filters_raw) {
 
     QStringList filter_list;
     for (const QStringRef& filter_ref : filter_refs)
-        filter_list.append(QChar('*') + filter_ref.trimmed());
+        filter_list.append(QLatin1Char('*') + filter_ref.trimmed());
 
     filter_list.removeDuplicates();
     return filter_list;
@@ -98,7 +98,7 @@ struct SystemEntry {
 
 SystemEntry read_system_entry(QXmlStreamReader& xml)
 {
-    Q_ASSERT(xml.isStartElement() && xml.name() == "system");
+    Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("system"));
 
     // read all XML fields into a key-value map
 
@@ -146,8 +146,8 @@ SystemEntry read_system_entry(QXmlStreamReader& xml)
 
     // do some path formatting
     xml_props[QLatin1String("path")]
-        .replace("\\", "/")
-        .replace("~", paths::homePath());
+        .replace(QLatin1Char('\\'), QLatin1Char('/'))
+        .replace(QLatin1Char('~'), paths::homePath());
 
 
     // construct the new platform

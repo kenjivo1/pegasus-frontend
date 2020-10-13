@@ -114,7 +114,7 @@ void try_register_default_mapping(int device_idx)
         "back:b8,start:b9,guide:b16,"
         "leftstick:b10,rightstick:b11,"
         "leftx:a0,lefty:a1,rightx:a2,righty:a3");
-    const QString new_mapping = guid_str % QLatin1Char(',') % name % default_mapping;
+    const QString new_mapping = guid_str % QLatin1Char(',') % name % QLatin1String(default_mapping);
 
     if (SDL_GameControllerAddMapping(new_mapping.toLocal8Bit().data()) < 0) {
         qCritical().noquote() << "SDL2: failed to set the default layout for gamepad" << pretty_idx(device_idx);
@@ -331,7 +331,7 @@ void GamepadManagerSDL2::load_user_gamepaddb(const QString& dir)
     while (db_stream.readLineInto(&line)) {
         linenum++;
 
-        if (line.startsWith('#'))
+        if (line.startsWith(QLatin1Char('#')))
             continue;
 
         const std::string guid_str = line.left(GUID_STR_LEN).toStdString();

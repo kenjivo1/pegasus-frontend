@@ -85,7 +85,7 @@ std::vector<model::ThemeEntry> find_available_themes()
     for (auto& path : search_paths) {
         QDirIterator themedir(path, filters, flags);
         while (themedir.hasNext()) {
-            const QString basedir = themedir.next() % '/';
+            const QString basedir = themedir.next() % QLatin1Char('/');
             const QString meta_path = basedir % META_FILENAME;
             QString qml_path = basedir % QML_FILENAME;
 
@@ -105,7 +105,7 @@ std::vector<model::ThemeEntry> find_available_themes()
             }
 
             // add the qrc/file protocol prefix
-            const bool is_builtin = basedir.startsWith(':');
+            const bool is_builtin = basedir.startsWith(QLatin1Char(':'));
             qml_path = is_builtin
                 ? QLatin1String("qrc://") % qml_path.midRef(1)
                 : QUrl::fromLocalFile(qml_path).toString();

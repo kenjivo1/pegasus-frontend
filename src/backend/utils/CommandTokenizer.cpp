@@ -32,10 +32,10 @@ int str_next_matching(const QString& str, const int from, const std::function<bo
     return -1;
 }
 bool char_is_singlequote(const QChar c) {
-    return c == QChar('\'');
+    return c == QLatin1Char('\'');
 }
 bool char_is_doublequote(const QChar c) {
-    return c == QChar('"');
+    return c == QLatin1Char('"');
 }
 bool char_is_nonspace(const QChar c) {
     return !c.isSpace();
@@ -83,10 +83,10 @@ QStringList tokenize_command(const QString& str)
 
 QString escape_command(const QString& str)
 {
-    constexpr QChar SINGLE_QUOTE = '\'';
-    constexpr QChar DOUBLE_QUOTE = '"';
+    constexpr QLatin1Char SINGLE_QUOTE('\'');
+    constexpr QLatin1Char DOUBLE_QUOTE('"');
 
-    if (!str.contains(QChar(' ')))
+    if (!str.contains(QLatin1Char(' ')))
         return str;
 
     if (!str.contains(SINGLE_QUOTE))

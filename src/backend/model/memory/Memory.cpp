@@ -151,8 +151,8 @@ void Memory::unset(const QString& key)
 
 void Memory::changeTheme(const QString& theme_root_dir)
 {
-    Q_ASSERT(theme_root_dir.endsWith('/'));
-    const int dir_name_start = theme_root_dir.lastIndexOf('/', -2) + 1;
+    Q_ASSERT(theme_root_dir.endsWith(QLatin1Char('/')));
+    const int dir_name_start = theme_root_dir.lastIndexOf(QLatin1Char('/'), -2) + 1;
     const int dir_name_len = theme_root_dir.length() - dir_name_start - 1;
     Q_ASSERT(dir_name_len > 0);
     m_current_theme = theme_root_dir.mid(dir_name_start, dir_name_len);

@@ -128,7 +128,7 @@ void LoadContext::handle_entry(const size_t lineno,
                                const QString& key,
                                const std::vector<QString>& vals) const
 {
-    QStringList sections = key.split('.');
+    QStringList sections = key.split(QLatin1Char('.'));
     if (sections.size() < 2) {
         log_unknown_key(lineno, key);
         return;
@@ -238,7 +238,7 @@ void LoadContext::handle_key_attrib(const size_t lineno, const QString& key, con
 
     QVector<QKeySequence> keyseqs;
 
-    const auto key_strs = val.splitRef(',', QString::SkipEmptyParts);
+    const auto key_strs = val.splitRef(QLatin1Char(','), Qt::SkipEmptyParts);
     for (const QStringRef& strref : key_strs) {
         const QString str = strref
             .trimmed()
@@ -294,7 +294,7 @@ void SaveContext::print_general(QTextStream& stream) const
     for (const auto& entry : maps.str_to_general_opt)
         option_names.emplace(entry.second, entry.first);
 
-    const QString configdir_path = paths::writableConfigDir() + QChar('/');
+    const QString configdir_path = paths::writableConfigDir() + QLatin1Char('/');
     const QString theme_path = AppSettings::general.theme.startsWith(configdir_path)
         ? AppSettings::general.theme.mid(configdir_path.length())
         : AppSettings::general.theme;
@@ -337,13 +337,13 @@ void SaveContext::print_providers(QTextStream& stream) const
                     option.first);
 
             if (option.second.size() == 1) {
-                stream << QChar(' ') << option.second.front() << QChar('\n');
+                stream << QLatin1Char(' ') << option.second.front() << QLatin1Char('\n');
                 continue;
             }
 
-            stream << QChar('\n');
+            stream << QLatin1Char('\n');
             for (const QString& val : option.second)
-                stream << QLatin1String("  ") << val << QChar('\n');
+                stream << QLatin1String("  ") << val << QLatin1Char('\n');
         }
     }
 }
@@ -362,7 +362,7 @@ void SaveContext::print_keys(QTextStream& stream) const
 
             key_strs << keyseq
                 .toString()
-                .replace(',', COMMA_NAME_STR);
+                .replace(QLatin1Char(','), COMMA_NAME_STR);
         }
 
         if (key_strs.isEmpty())
@@ -371,7 +371,7 @@ void SaveContext::print_keys(QTextStream& stream) const
         stream << LINE_TEMPLATE.arg(
             category_names.at(ConfigEntryCategory::KEYS),
             entry.first,
-            key_strs.join(','));
+            key_strs.join(QLatin1Char(',')));
     }
 }
 

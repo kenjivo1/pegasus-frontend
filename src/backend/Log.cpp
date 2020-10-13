@@ -68,7 +68,7 @@ private:
 #endif
 
     void colorlog(const char* const prefix, const QString& msg) {
-        m_stream << prefix << QChar(' ') << msg << m_fmt_reset << endl;
+        m_stream << prefix << QLatin1Char(' ') << msg << m_fmt_reset << Qt::endl;
     }
 };
 
@@ -112,9 +112,9 @@ private:
     }
 
     void datelog(const char* const marker, const QString& msg) {
-        m_stream << QDateTime::currentDateTime().toString(Qt::ISODate) << QChar(' ')
-                 << marker << QChar(' ')
-                 << msg << QChar('\n');
+        m_stream << QDateTime::currentDateTime().toString(Qt::ISODate) << QLatin1Char(' ')
+                 << marker << QLatin1Char(' ')
+                 << msg << QLatin1Char('\n');
     }
 };
 

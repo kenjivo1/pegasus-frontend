@@ -67,7 +67,7 @@ void read_stream(QTextStream& stream,
                  const std::function<void(const Entry&)>& onAttributeFound,
                  const std::function<void(const Error&)>& onError)
 {
-    constexpr auto EMPTY_LINE_MARK = QChar('.');
+    constexpr auto EMPTY_LINE_MARK = QLatin1Char('.');
     const QRegularExpression rx_keyval(QStringLiteral(R"(^([^:]+):(.*)$)")); // key: value
 
     Error error {0, {}};
@@ -90,7 +90,7 @@ void read_stream(QTextStream& stream,
     while (stream.readLineInto(&line)) {
         linenum++;
 
-        if (line.startsWith('#'))
+        if (line.startsWith(QLatin1Char('#')))
             continue;
 
         const QStringRef trimmed_line = line.leftRef(-1).trimmed();
@@ -155,8 +155,8 @@ QString merge_lines(const std::vector<QString>& lines)
         return QString();
 
 
-    constexpr QChar SPACE(' ');
-    constexpr QChar NEWLINE('\n');
+    constexpr QLatin1Char SPACE(' ');
+    constexpr QLatin1Char NEWLINE('\n');
 
     int len = 0;
     for (const QString& line : lines)
