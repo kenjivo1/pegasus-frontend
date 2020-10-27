@@ -37,3 +37,40 @@ target_link_libraries(pegasus-fe PUBLIC
 
 include(PegasusCommonProps)
 pegasus_add_common_props(pegasus-fe)
+
+
+# Install
+
+include(PegasusTargetPlatform)
+
+if(INSTALL_BINDIR)
+    install(TARGETS pegasus-fe RUNTIME DESTINATION "${INSTALL_BINDIR}")
+endif()
+
+if(INSTALL_DOCDIR)
+    install(FILES
+        "${PROJECT_SOURCE_DIR}/README.md"
+        "${PROJECT_SOURCE_DIR}/LICENSE.md"
+        DESTINATION "${INSTALL_DOCDIR}"
+    )
+endif()
+
+if(PEGASUS_ON_X11)
+    if(INSTALL_ICONDIR)
+        install(FILES platform/linux/icons/16/org.pegasus_frontend.Pegasus.png DESTINATION "${INSTALL_ICONDIR}/16x16/apps/")
+        install(FILES platform/linux/icons/32/org.pegasus_frontend.Pegasus.png DESTINATION "${INSTALL_ICONDIR}/32x32/apps/")
+        install(FILES platform/linux/icons/48/org.pegasus_frontend.Pegasus.png DESTINATION "${INSTALL_ICONDIR}/48x48/apps/")
+        install(FILES platform/linux/icons/64/org.pegasus_frontend.Pegasus.png DESTINATION "${INSTALL_ICONDIR}/64x64/apps/")
+        install(FILES platform/linux/icons/128/org.pegasus_frontend.Pegasus.png DESTINATION "${INSTALL_ICONDIR}/128x128/apps/")
+    endif()
+    if(INSTALL_DESKTOPDIR AND INSTALL_BINDIR)
+        configure_file(
+            platform/linux/org.pegasus_frontend.Pegasus.desktop.in
+            org.pegasus_frontend.Pegasus.desktop
+        )
+        install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.pegasus_frontend.Pegasus.desktop" DESTINATION "${INSTALL_DESKTOPDIR}")
+    endif()
+    if(INSTALL_APPSTREAMDIR)
+        install(FILES platform/linux/org.pegasus_frontend.Pegasus.metainfo.xml DESTINATION "${INSTALL_APPSTREAMDIR}")
+    endif()
+endif()

@@ -8,6 +8,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_SKIP_RPATH ON)
 
 # Enable processing Qt generated files
 if (POLICY CMP0071)

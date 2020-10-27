@@ -7,7 +7,7 @@ function(pegasus_add_common_props target)
         QT_DEPRECATED_WARNINGS
         QT_DISABLE_DEPRECATED_BEFORE=0x060000
         QT_NO_CAST_FROM_ASCII
-        QT_NO_CAST_FROM_BYTEARRAY
+        # QT_NO_CAST_FROM_BYTEARRAY
         QT_NO_CAST_TO_ASCII
         QT_NO_FOREACH
         QT_NO_JAVA_STYLE_ITERATORS
